@@ -1,15 +1,21 @@
 import { useState } from 'react'
 import InputField from './components/InputField'
+import BackgroundSelector from './components/BackgroundSelector'
 
 function App() {
   const [inputValue, setInputValue] = useState('')
+  const [bgColor, setBgColor] = useState('#F9FAFB')
 
   const handleInputChange = (value) => {
     setInputValue(value)
   }
 
+  const handleBgColorChange = (color) => {
+    setBgColor(color)
+  }
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-300" style={{ backgroundColor: bgColor }}>
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-3xl font-bold text-center text-primary mb-6">
           <i className="bi bi-input-cursor-text mr-2"></i>
@@ -21,6 +27,11 @@ function App() {
           onChange={handleInputChange}
           placeholder="Type something here..."
           label="Input Field"
+        />
+        
+        <BackgroundSelector 
+          currentColor={bgColor}
+          onColorChange={handleBgColorChange}
         />
         
         {inputValue && (
